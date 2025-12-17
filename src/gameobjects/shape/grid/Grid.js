@@ -153,7 +153,7 @@ var Grid = new Class({
 
         if (strokeFillColor !== undefined)
         {
-            this.setStrokeStyle(strokeFillColor, strokeFillAlpha);
+            this.setStrokeStyle(1, strokeFillColor, strokeFillAlpha);
         }
 
         this.updateDisplayOrigin();
