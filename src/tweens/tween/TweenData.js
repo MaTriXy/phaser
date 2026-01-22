@@ -225,7 +225,7 @@ var TweenData = new Class({
         var key = this.key;
 
         //  Bail out if we don't have a target to act upon
-        if (!target)
+        if (!target || target.isDestroyed)
         {
             this.setCompleteState();
 
