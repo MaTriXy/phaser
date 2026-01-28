@@ -13,6 +13,7 @@ var Bokeh = require('../../filters/Bokeh');
 var ColorMatrix = require('../../filters/ColorMatrix');
 var Displacement = require('../../filters/Displacement');
 var Glow = require('../../filters/Glow');
+var ImageLight = require('../../filters/ImageLight');
 var Key = require('../../filters/Key');
 var Mask = require('../../filters/Mask');
 var ParallelFilters = null;
@@ -420,6 +421,38 @@ var FilterList = new Class({
             quality,
             distance
         ));
+    },
+
+    /**
+     * Adds an ImageLight effect.
+     *
+     * ImageLight is a filter for image based lighting (IBL).
+     * It is used to simulate the lighting of an image
+     * using an environment map and a normal map.
+     *
+     * The environment map is an image that describes the lighting of the scene.
+     * This filter uses a single panorama image as the environment map.
+     * The top of the image is the sky, the bottom is the ground,
+     * and the X axis covers a full rotation.
+     * This kind of image is distorted towards the top and bottom,
+     * as the X axis is stretched wider and wider,
+     * so be careful if you're creating your own environment maps.
+     *
+     * Cube maps are not supported by Phaser at the time of writing.
+     *
+     * The effect is basically a reflection of the environment at infinite range.
+     * A sharp environment map will produce a sharp reflection,
+     * while a blurry environment map will produce a diffuse reflection.
+     *
+     * @method Phaser.GameObjects.Components.FilterList#addImageLight
+     * @since 4.0.0
+     *
+     * @param {Phaser.Types.Filters.ImageLightConfig} config
+     * @returns {Phaser.Filters.ImageLight} The new ImageLight filter controller.
+     */
+    addImageLight: function (config)
+    {
+        return this.add(new ImageLight(this.camera, config));
     },
 
     /**

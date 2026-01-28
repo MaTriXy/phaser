@@ -39,6 +39,7 @@ var RenderNodes = {
     FilterColorMatrix: require('./filters/FilterColorMatrix'),
     FilterDisplacement: require('./filters/FilterDisplacement'),
     FilterGlow: require('./filters/FilterGlow'),
+    FilterImageLight: require('./filters/FilterImageLight'),
     FilterKey: require('./filters/FilterKey'),
     FilterMask: require('./filters/FilterMask'),
     FilterParallelFilters: require('./filters/FilterParallelFilters'),
