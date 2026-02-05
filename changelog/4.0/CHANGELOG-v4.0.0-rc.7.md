@@ -21,6 +21,12 @@
 - `ImageLight` filter for image-based lighting, a soft, highly realistic form of illumination.
 - `PanoramaBlur` filter for adjusting images for `ImageLight`.
 - `NormalTools` filter for manipulating normal maps.
+- `Vignette` filter returns from Phaser 3.
+  - Now sets a configurable border color instead of erasing alpha.
+  - Also supports limited blend modes.
+- `Wipe` filter returns from Phaser 3.
+  - Now allows you to set the texture displayed in wiped-away regions.
+  - Now provides helper functions to set directional reveal/wipe effects.
 - `TextureSource#setSource` method for updating the source of a texture. Note that, while the source will update, derived values such as object sizes will not. It's advisable to switch between textures of identical size to avoid unexpected transforms.
 - `TextureSource#setDataSource` method already existed, but has been changed to be more useful like `setSource`.
 - `TextureManager#addFlatColor` method for creating a flat texture with custom color, alpha, width, and height. This is intended to act as a temporary stand-in for textures you might not have loaded yet.
