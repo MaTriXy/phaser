@@ -2,6 +2,14 @@
 
 ## New Features
 
+- `Actions.AddEffectBloom` allows you to quickly set up a bloom effect, using several filters, on a target Camera or GameObject.
+- `Display.Color`: several helper methods now support modifying an existing `Color` object instead of creating a new one.
+  - `HSLToColor`
+  - `HexStringToColor`
+  - `IntegerToColor`
+  - `ObjectToColor`
+  - `RGBStringToColor`
+  - `ValueToColor`
 - `GameObject#isDestroyed` flag helps you avoid errors when accessing an object that might have removed expected properties during destruction.
 - `Tint` is overhauled.
   - `tint` and `setTint()` now purely affect the color settings.

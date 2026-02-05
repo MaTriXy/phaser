@@ -10,6 +10,7 @@
 
 module.exports = {
 
+    AddEffectBloom: require('./AddEffectBloom'),
     AlignTo: require('./AlignTo'),
     Angle: require('./Angle'),
     Call: require('./Call'),

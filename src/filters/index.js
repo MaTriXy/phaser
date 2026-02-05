@@ -17,14 +17,21 @@ var Filters = {
     Blur: require('./Blur'),
     Bokeh: require('./Bokeh'),
     ColorMatrix: require('./ColorMatrix'),
+    CombineColorMatrix: require('./CombineColorMatrix'),
     Displacement: require('./Displacement'),
     Glow: require('./Glow'),
+    ImageLight: require('./ImageLight'),
+    Key: require('./Key'),
     Mask: require('./Mask'),
+    NormalTools: require('./NormalTools'),
+    PanoramaBlur: require('./PanoramaBlur'),
     ParallelFilters: require('./ParallelFilters'),
     Pixelate: require('./Pixelate'),
     Sampler: require('./Sampler'),
     Shadow: require('./Shadow'),
-    Threshold: require('./Threshold')
+    Threshold: require('./Threshold'),
+    Vignette: require('./Vignette'),
+    Wipe: require('./Wipe')
 };
 
 module.exports = Filters;
