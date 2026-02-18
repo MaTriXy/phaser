@@ -211,7 +211,7 @@ var Tint = {
             var white = 0xffffff;
 
             return (
-                this.tintFill === TintModes.MULTIPLY ||
+                this.tintFill !== TintModes.MULTIPLY ||
                 this.tintTopLeft !== white ||
                 this.tintTopRight !== white ||
                 this.tintBottomLeft !== white ||
