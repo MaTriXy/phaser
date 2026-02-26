@@ -41,7 +41,7 @@ Band getBand(float progress)
     for (float i = 0.0; i < BAND_TREE_DEPTH; i++)
     {
         // Wrap texture coordinate inside multi-row textures.
-        x = mod(index, uRampResolution.x) + TREE_OFFSET;
+        x = mod(index + TREE_OFFSET, uRampResolution.x);
         y = floor(x / uRampResolution.x);
 
         float pivot = decodeNumberSample(texture2D(uRampTexture, vec2(x, y) * rampStep + c));
@@ -68,17 +68,17 @@ Band getBand(float progress)
 
     // Get start color.
     x =  mod(bandIndex, uRampResolution.x);
-    y = floor(x / uRampResolution.x);
+    y = floor(bandIndex / uRampResolution.x);
     vec4 colorStart = texture2D(uRampTexture, vec2(x, y) * rampStep + c);
 
     // Get end color.
     x =  mod(bandIndex + 1.0, uRampResolution.x);
-    y = floor(x / uRampResolution.x);
+    y = floor(bandIndex / uRampResolution.x);
     vec4 colorEnd = texture2D(uRampTexture, vec2(x, y) * rampStep + c);
 
     // Get additional data.
     x =  mod(bandIndex + 2.0, uRampResolution.x);
-    y = floor(x / uRampResolution.x);
+    y = floor(bandIndex / uRampResolution.x);
     float bandData = decodeNumberSample(texture2D(uRampTexture, vec2(x, y) * rampStep + c));
     int colorSpace = int(floor(bandData / 255.0));
     int interpolation = int(floor(bandData)) - colorSpace * 255;

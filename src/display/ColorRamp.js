@@ -35,7 +35,7 @@ var getTint = Utils.getTintFromFloats;
  * @constructor
  *
  * @param {Phaser.Scene} scene - The current scene.
- * @param {Phaser.Types.Display.ColorBandConfig | Phaser.Display.ColorBand | (Phaser.Types.Display.ColorBandConfig | Phaser.Display.ColorBand)[]} bands - The bands which make up this ramp. This can be one entry or an array, and can be configs or existing instances.
+ * @param {Phaser.Types.Display.ColorBandConfig | Phaser.Display.ColorBand | (Phaser.Types.Display.ColorBandConfig | Phaser.Display.ColorBand)[]} bands - The bands which make up this ramp. This can be one entry or an array, and can be configs or existing instances. A band count over 1048576 may be unsafe.
  * @param {boolean} [gpuEncode=true] - Whether to create a data texture to use this ramp in shaders.
  */
 var ColorRamp = new Class({
@@ -252,15 +252,15 @@ var ColorRamp = new Class({
         this.dataTextureResolution[0] = width;
         this.dataTextureResolution[1] = height;
 
-        var data = new ArrayBuffer(width * height * 4 * 4);
+        var data = new ArrayBuffer(width * height * 4);
         var u32 = new Uint32Array(data);
         var u8 = new Uint8Array(data);
         var index32 = 0;
         var FLOAT_FACTOR = 256 * 256; // Encode floating point numbers as integers.
 
         // Encode start and end as RG.BA
-        u32[index32++] = this.bands[0].start * FLOAT_FACTOR;
-        u32[index32++] = this.bands[this.bands.length - 1].end * FLOAT_FACTOR;
+        u32[index32++] = Math.round(this.bands[0].start * FLOAT_FACTOR);
+        u32[index32++] = Math.round(this.bands[this.bands.length - 1].end * FLOAT_FACTOR);
 
         // Encode tree nodes.
         // Each tree node is a split point in RG.BA form.
@@ -271,7 +271,7 @@ var ColorRamp = new Class({
             {
                 var bandIndex = Math.floor(bandTreeSize * breadth / maxBreadth);
                 var band = this.bands[Math.min(bandIndex, bandCount - 1)];
-                u32[index32++] = band.end * FLOAT_FACTOR;
+                u32[index32++] = Math.round(band.end * FLOAT_FACTOR);
             }
         }
 
@@ -299,7 +299,7 @@ var ColorRamp = new Class({
 
         if (!this.glTexture)
         {
-            var textureWrapper = this.scene.renderer.createUint8ArrayTexture(u8, width, height, false, true);
+            var textureWrapper = this.scene.renderer.createUint8ArrayTexture(u8, width, height, false, false);
             this.glTexture = textureWrapper;
 
             var textureKey = UUID();
