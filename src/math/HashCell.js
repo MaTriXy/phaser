@@ -24,13 +24,16 @@ var Hash = require('./Hash');
  * It is the distance from the input vector to the nearest distorted cell
  * center. In higher dimensions, the possible distance is higher.
  *
+ * Note: If you specify dimensional properties in the config parameter,
+ * ensure they are at least as long as the input vector.
+ * Missing values can corrupt the result.
+ *
  * Disclaimer: This function is intended for efficiently generating visual
  * variety. It is not intended for cryptographic use. Do not use it for
  * security/authentication/encryption purposes. Use a proper tool instead.
  *
  * Performance note: A 16ms frame has enough time to generate
- * a few hundred or thousand cellular hash values, depending on device
- * and workload.
+ * a few hundred hash values, depending on device and workload.
  *
  * See {@see Phaser.Math.Hash} for more information on the hashing algorithms.
  *
@@ -59,9 +62,17 @@ var HashCell = function (vector, config)
     return value + 0.5;
 };
 
+var defaultSeed = [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16 ];
+var point = Array(4);
+var frac = Array(4);
+var neighbor = Array(4);
+var cell = Array(4);
+var jit = Array(4);
+var diff = Array(4);
+
 var worley = function (vector, config, scale)
 {
-    var i, j, k, l, neighbor, jit, d, index;
+    var i, jit, d, index;
     var mode = config.noiseMode || 0;
     var smoothing = config.noiseSmoothing === undefined ? 1 : config.noiseSmoothing;
 
@@ -69,8 +80,6 @@ var worley = function (vector, config, scale)
     var axes = Math.max(1, Math.min(vector.length, 4));
     var a3 = axes * 3;
     var cells = config.noiseCells || [ 32, 32, 32, 32 ].slice(0, axes);
-    var point = Array(axes);
-    var frac = Array(axes);
     for (i = 0; i < axes; i++)
     {
         var c = vector[i] * scale * cells[i];
@@ -89,12 +98,21 @@ var worley = function (vector, config, scale)
     var neighbors = Math.pow(3, axes);
     for (index = 0; index < neighbors; index++)
     {
-        i = index % a3 - 1;
-        j = Math.floor(index / 3) % a3 - 1;
-        k = Math.floor(index / 9) % a3 - 1;
-        l = Math.floor(index / 27) % a3 - 1;
+        // Generate neighbourhood in range -1,1 on relevant axes.
+        neighbor[0] = index % a3 - 1;
+        if (axes > 1)
+        {
+            neighbor[1] = Math.floor(index / 3) % a3 - 1;
+            if (axes > 2)
+            {
+                neighbor[2] = Math.floor(index / 9) % a3 - 1;
+                if (axes > 3)
+                {
+                    neighbor[3] = Math.floor(index / 27) % a3 - 1;
+                }
+            }
+        }
 
-        neighbor = [ i , j , k , l ];
         jit = jitter(
             axes,
             point,
@@ -102,7 +120,7 @@ var worley = function (vector, config, scale)
             config,
             scale
         );
-        d = diff(
+        d = distSquared(
             axes,
             neighbor,
             frac,
@@ -144,19 +162,15 @@ var worley = function (vector, config, scale)
     return -(1 / 32 * smoothing) * Math.log2(value);
 };
 
-var defaultSeed = [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16 ];
-
 var jitter = function (axes, point, neighbor, config, scale)
 {
     var i, j;
     var wrap = config.noiseWrap ? config.noiseWrap : config.noiseCells || [ 32, 32, 32, 32 ];
     var seed = config.noiseSeed ? config.noiseSeed : defaultSeed;
-    var cell = Array(axes);
     for (i = 0; i < axes; i++)
     {
         cell[i] = (point[i] + neighbor[i]) % (wrap[i] * scale);
     }
-    var jitter = Array(axes);
     for (i = 0; i < axes; i++)
     {
         var vec = Array(axes);
@@ -164,15 +178,14 @@ var jitter = function (axes, point, neighbor, config, scale)
         {
             vec[j] = cell[j] + seed[i * axes + j];
         }
-        jitter[i] = Hash(vec, config.algorithm);
+        jit[i] = Hash(vec, config.algorithm);
     }
-    return jitter;
+    return jit;
 };
 
-var diff = function (axes, neighbor, frac, jitter)
+var distSquared = function (axes, neighbor, frac, jitter)
 {
     var i;
-    var diff = Array(axes);
     for (i = 0; i < axes; i++)
     {
         diff[i] = neighbor[i] - frac[i] + jitter[i];
