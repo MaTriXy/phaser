@@ -71,7 +71,7 @@ var NoiseSimplex2D = new Class({
             fragmentSource: NoiseSimplex2DFrag,
             shaderAdditions: [
                 {
-                    name: 'ITERATION_COUNT_1',
+                    name: 'ITERATION_COUNT_1_WARP_ITERATION_COUNT_1',
                     tags: [ 'ITERATION_COUNT' ],
                     additions: {
                         fragmentIterations: '#define ITERATION_COUNT 1.0\n#define WARP_ITERATION_COUNT 1.0'
@@ -579,7 +579,7 @@ var NoiseSimplex2D = new Class({
         var iterations = Math.max(1, Math.floor(gameObject.noiseIterations));
         var warpIterations = Math.max(1, Math.floor(gameObject.noiseWarpIterations));
         var iterationAdd = renderNode.programManager.getAdditionsByTag('ITERATION_COUNT')[0];
-        iterationAdd.name = 'ITERATION_COUNT_' + iterations;
+        iterationAdd.name = 'ITERATION_COUNT_' + iterations + '_WARP_ITERATION_COUNT_' + warpIterations;
         iterationAdd.additions.fragmentIterations = '#define ITERATION_COUNT ' + iterations + '.0' + '\n' + '#define WARP_ITERATION_COUNT ' + warpIterations + '.0';
 
         var normalAdd = renderNode.programManager.getAdditionsByTag('NORMALMAP')[0];
