@@ -14,7 +14,7 @@ var Random = require('./Random');
 
 /**
  * @classdesc
- * Encapsulates a 2D rectangle defined by its corner point in the top-left and its extends in x (width) and y (height)
+ * Encapsulates a 2D rectangle defined by its corner point in the top-left and its extents in x (width) and y (height)
  *
  * @class Rectangle
  * @memberof Phaser.Geom
