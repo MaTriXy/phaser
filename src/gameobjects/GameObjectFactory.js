@@ -206,7 +206,7 @@ GameObjectFactory.register = function (factoryType, factoryFunction)
 /**
  * Static method called directly by the Game Object factory functions.
  * With this method you can remove a custom GameObject factory registered in the GameObjectFactory,
- * providing a its `factoryType`.
+ * providing its `factoryType`.
  *
  * @method Phaser.GameObjects.GameObjectFactory.remove
  * @static
