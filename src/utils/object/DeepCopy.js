@@ -10,7 +10,7 @@
  * @function Phaser.Utils.Objects.DeepCopy
  * @since 3.50.0
  *
- * @param {object} obj - The object to deep copy.
+ * @param {object} inObject - The object to deep copy.
  *
  * @return {object} A deep copy of the original object.
  */
