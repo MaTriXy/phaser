@@ -16,7 +16,7 @@
  * @type {string}
  * @since 3.0.0
  *
- * @param {Phaser.Loader.File} file - A reference to the File which errored during load.
+ * @param {Phaser.Loader.File} file - A reference to the File for which progress has been updated.
  * @param {number} percentComplete - A value between 0 and 1 indicating how 'complete' this file is.
  */
 module.exports = 'fileprogress';
