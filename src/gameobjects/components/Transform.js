@@ -245,7 +245,7 @@ var Transform = {
      *
      * @name Phaser.GameObjects.Components.Transform#rotation
      * @type {number}
-     * @default 1
+     * @default 0
      * @since 3.0.0
      */
     rotation: {
