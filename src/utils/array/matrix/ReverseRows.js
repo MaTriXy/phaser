@@ -29,7 +29,7 @@
  *
  * @param {T[][]} [matrix] - The array matrix to reverse the rows for.
  *
- * @return {T[][]} The column reversed matrix.
+ * @return {T[][]} The row reversed matrix.
  */
 var ReverseRows = function (matrix)
 {
