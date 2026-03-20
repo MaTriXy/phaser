@@ -1082,7 +1082,7 @@ var WebGLRenderer = new Class({
      *
      * Phaser v3.60 Debug has a build of Spector.js embedded in it, which is a WebGL inspector
      * that allows for live inspection of your WebGL calls. Although it's easy to add the Spector
-     * extension to a desktop browsr, by embedding it in Phaser we can make it available in mobile
+     * extension to a desktop browser, by embedding it in Phaser we can make it available in mobile
      * browsers too, making it a powerful tool for debugging WebGL games on mobile devices where
      * extensions are not permitted.
      *
@@ -1115,7 +1115,7 @@ var WebGLRenderer = new Class({
      *
      * Phaser v3.60 Debug has a build of Spector.js embedded in it, which is a WebGL inspector
      * that allows for live inspection of your WebGL calls. Although it's easy to add the Spector
-     * extension to a desktop browsr, by embedding it in Phaser we can make it available in mobile
+     * extension to a desktop browser, by embedding it in Phaser we can make it available in mobile
      * browsers too, making it a powerful tool for debugging WebGL games on mobile devices where
      * extensions are not permitted.
      *
@@ -1142,7 +1142,7 @@ var WebGLRenderer = new Class({
      *
      * Phaser v3.60 Debug has a build of Spector.js embedded in it, which is a WebGL inspector
      * that allows for live inspection of your WebGL calls. Although it's easy to add the Spector
-     * extension to a desktop browsr, by embedding it in Phaser we can make it available in mobile
+     * extension to a desktop browser, by embedding it in Phaser we can make it available in mobile
      * browsers too, making it a powerful tool for debugging WebGL games on mobile devices where
      * extensions are not permitted.
      *
@@ -1169,7 +1169,7 @@ var WebGLRenderer = new Class({
      *
      * Phaser v3.60 Debug has a build of Spector.js embedded in it, which is a WebGL inspector
      * that allows for live inspection of your WebGL calls. Although it's easy to add the Spector
-     * extension to a desktop browsr, by embedding it in Phaser we can make it available in mobile
+     * extension to a desktop browser, by embedding it in Phaser we can make it available in mobile
      * browsers too, making it a powerful tool for debugging WebGL games on mobile devices where
      * extensions are not permitted.
      *
@@ -1201,7 +1201,7 @@ var WebGLRenderer = new Class({
      *
      * Phaser v3.60 Debug has a build of Spector.js embedded in it, which is a WebGL inspector
      * that allows for live inspection of your WebGL calls. Although it's easy to add the Spector
-     * extension to a desktop browsr, by embedding it in Phaser we can make it available in mobile
+     * extension to a desktop browser, by embedding it in Phaser we can make it available in mobile
      * browsers too, making it a powerful tool for debugging WebGL games on mobile devices where
      * extensions are not permitted.
      *
@@ -1238,7 +1238,7 @@ var WebGLRenderer = new Class({
      *
      * Phaser v3.60 Debug has a build of Spector.js embedded in it, which is a WebGL inspector
      * that allows for live inspection of your WebGL calls. Although it's easy to add the Spector
-     * extension to a desktop browsr, by embedding it in Phaser we can make it available in mobile
+     * extension to a desktop browser, by embedding it in Phaser we can make it available in mobile
      * browsers too, making it a powerful tool for debugging WebGL games on mobile devices where
      * extensions are not permitted.
      *
@@ -1832,7 +1832,7 @@ var WebGLRenderer = new Class({
     },
 
     /**
-     * Wrapper for creating a vertex buffer.
+     * Wrapper for creating an index buffer.
      *
      * @method Phaser.Renderer.WebGL.WebGLRenderer#createIndexBuffer
      * @since 3.0.0
@@ -1936,7 +1936,7 @@ var WebGLRenderer = new Class({
      * @method Phaser.Renderer.WebGL.WebGLRenderer#deleteBuffer
      * @since 3.0.0
      *
-     * @param {Phaser.Renderer.WebGL.Wrappers.WebGLBufferWrapper} vertexBuffer - The WebGLBuffer to be deleted.
+     * @param {Phaser.Renderer.WebGL.Wrappers.WebGLBufferWrapper} buffer - The WebGLBuffer to be deleted.
      *
      * @return {this} This WebGLRenderer instance.
      */
@@ -2293,7 +2293,7 @@ var WebGLRenderer = new Class({
      * @param {HTMLCanvasElement} srcCanvas - The Canvas to create the WebGL Texture from
      * @param {Phaser.Renderer.WebGL.Wrappers.WebGLTextureWrapper} [dstTexture] - The destination WebGLTextureWrapper to set.
      * @param {boolean} [noRepeat=false] - Should this canvas be allowed to set `REPEAT` (such as for Text objects?)
-     * @param {boolean} [flipY=true] - Should the WebGL Texture set `UNPACK_MULTIPLY_FLIP_Y`?
+     * @param {boolean} [flipY=true] - Should the WebGL Texture set `UNPACK_FLIP_Y_WEBGL`?
      *
      * @return {Phaser.Renderer.WebGL.Wrappers.WebGLTextureWrapper} The newly created, or updated, WebGLTextureWrapper.
      */
@@ -2344,7 +2344,7 @@ var WebGLRenderer = new Class({
      *
      * @param {HTMLCanvasElement} srcCanvas - The Canvas to create the WebGL Texture from.
      * @param {boolean} [noRepeat=false] - Should this canvas be allowed to set `REPEAT` (such as for Text objects?)
-     * @param {boolean} [flipY=true] - Should the WebGL Texture set `UNPACK_MULTIPLY_FLIP_Y`?
+     * @param {boolean} [flipY=true] - Should the WebGL Texture set `UNPACK_FLIP_Y_WEBGL`?
      *
      * @return {Phaser.Renderer.WebGL.Wrappers.WebGLTextureWrapper} The newly created WebGLTextureWrapper.
      */
@@ -2364,7 +2364,7 @@ var WebGLRenderer = new Class({
      *
      * @param {HTMLCanvasElement} srcCanvas - The Canvas to update the WebGL Texture from.
      * @param {Phaser.Renderer.WebGL.Wrappers.WebGLTextureWrapper} dstTexture - The destination WebGLTextureWrapper to update.
-     * @param {boolean} [flipY=true] - Should the WebGL Texture set `UNPACK_MULTIPLY_FLIP_Y`?
+     * @param {boolean} [flipY=true] - Should the WebGL Texture set `UNPACK_FLIP_Y_WEBGL`?
      * @param {boolean} [noRepeat=false] - Should this canvas be allowed to set `REPEAT` (such as for Text objects?)
      *
      * @return {Phaser.Renderer.WebGL.Wrappers.WebGLTextureWrapper} The updated WebGLTextureWrapper. This is the same wrapper object as `dstTexture`.
@@ -2388,7 +2388,7 @@ var WebGLRenderer = new Class({
      * @param {HTMLVideoElement} srcVideo - The Video to create the WebGL Texture from
      * @param {Phaser.Renderer.WebGL.Wrappers.WebGLTextureWrapper} [dstTexture] - The destination WebGLTextureWrapper to set.
      * @param {boolean} [noRepeat=false] - Should this canvas be allowed to set `REPEAT`?
-     * @param {boolean} [flipY=true] - Should the WebGL Texture set `UNPACK_MULTIPLY_FLIP_Y`?
+     * @param {boolean} [flipY=true] - Should the WebGL Texture set `UNPACK_FLIP_Y_WEBGL`?
      *
      * @return {Phaser.Renderer.WebGL.Wrappers.WebGLTextureWrapper} The newly created, or updated, WebGLTextureWrapper.
      */
@@ -2439,7 +2439,7 @@ var WebGLRenderer = new Class({
      *
      * @param {HTMLVideoElement} srcVideo - The Video to create the WebGL Texture from
      * @param {boolean} [noRepeat=false] - Should this canvas be allowed to set `REPEAT`?
-     * @param {boolean} [flipY=true] - Should the WebGL Texture set `UNPACK_MULTIPLY_FLIP_Y`?
+     * @param {boolean} [flipY=true] - Should the WebGL Texture set `UNPACK_FLIP_Y_WEBGL`?
      *
      * @return {Phaser.Renderer.WebGL.Wrappers.WebGLTextureWrapper} The newly created WebGLTextureWrapper.
      */
@@ -2459,7 +2459,7 @@ var WebGLRenderer = new Class({
      *
      * @param {HTMLVideoElement} srcVideo - The Video to update the WebGL Texture with.
      * @param {Phaser.Renderer.WebGL.Wrappers.WebGLTextureWrapper} dstTexture - The destination WebGLTextureWrapper to update.
-     * @param {boolean} [flipY=true] - Should the WebGL Texture set `UNPACK_MULTIPLY_FLIP_Y`?
+     * @param {boolean} [flipY=true] - Should the WebGL Texture set `UNPACK_FLIP_Y_WEBGL`?
      * @param {boolean} [noRepeat=false] - Should this canvas be allowed to set `REPEAT`?
      *
      * @return {Phaser.Renderer.WebGL.Wrappers.WebGLTextureWrapper} The updated WebGLTextureWrapper. This is the same wrapper object as `dstTexture`.
@@ -2485,7 +2485,7 @@ var WebGLRenderer = new Class({
      * @param {number} width - The width of the texture.
      * @param {number} height - The height of the texture.
      * @param {boolean} [pma = true] - Should the texture be set as having premultiplied alpha?
-     * @param {boolean} [flipY = true] - Should the WebGL Texture set `UNPACK_MULTIPLY_FLIP_Y`?
+     * @param {boolean} [flipY = true] - Should the WebGL Texture set `UNPACK_FLIP_Y_WEBGL`?
      * @return {Phaser.Renderer.WebGL.Wrappers.WebGLTextureWrapper} The newly created WebGLTextureWrapper.
      */
     createUint8ArrayTexture: function (data, width, height, pma, flipY)
