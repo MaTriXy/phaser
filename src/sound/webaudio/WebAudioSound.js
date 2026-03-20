@@ -756,7 +756,7 @@ var WebAudioSound = new Class({
 
     /**
      * Method used internally for calculating the time
-     * at witch the loop source should start playing.
+     * at which the loop source should start playing.
      *
      * @method Phaser.Sound.WebAudioSound#getLoopTime
      * @since 3.0.0
