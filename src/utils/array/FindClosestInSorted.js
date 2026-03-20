@@ -5,7 +5,7 @@
  */
 
 /**
- * Searches a pre-sorted array for the closet value to the given number.
+ * Searches a pre-sorted array for the closest value to the given number.
  *
  * If the `key` argument is given it will assume the array contains objects that all have the required `key` property name,
  * and will check for the closest value of those to the given number.
