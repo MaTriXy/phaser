@@ -138,7 +138,7 @@ var configOpMap = [
  * ```
  *
  * The x value is the result of calling this function. This is only used when the
- * particle is emitted, so it provides it's initial starting value. It is not used
+ * particle is emitted, so it provides its initial starting value. It is not used
  * when the particle is updated (see the onUpdate callback for that)
  *
  * ## A start / end object:
@@ -282,7 +282,7 @@ var configOpMap = [
  * t - The current normalized lifetime of the particle, between 0 (birth) and 1 (death).
  * value - The current property value. At a minimum you should return this.
  *
- * By using the above configuration options you have an unlimited about of
+ * By using the above configuration options you have an unlimited amount of
  * control over how your particles behave.
  *
  * ## v3.55 Differences
