@@ -17,7 +17,7 @@ var Vector2 = require('../math/Vector2');
  * @classdesc
  * An Elliptical Curve derived from the Base Curve class.
  * 
- * See https://en.wikipedia.org/wiki/Elliptic_curve for more details.
+ * See https://en.wikipedia.org/wiki/Ellipse for more details.
  *
  * @class Ellipse
  * @extends Phaser.Curves.Curve
@@ -324,7 +324,7 @@ var EllipseCurve = new Class({
      * @method Phaser.Curves.Ellipse#setStartAngle
      * @since 3.0.0
      *
-     * @param {number} value - The start angle of this curve, in radians.
+     * @param {number} value - The start angle of this curve, in degrees.
      *
      * @return {this} This curve object.
      */
@@ -341,7 +341,7 @@ var EllipseCurve = new Class({
      * @method Phaser.Curves.Ellipse#setEndAngle
      * @since 3.0.0
      *
-     * @param {number} value - The end angle of this curve, in radians.
+     * @param {number} value - The end angle of this curve, in degrees.
      *
      * @return {this} This curve object.
      */
