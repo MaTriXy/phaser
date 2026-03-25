@@ -376,7 +376,7 @@ var FilterList = new Class({
      * or set the `colorMatrixSelf` and `colorMatrixTransfer` properties
      * directly.
      *
-     * @method Phaser.GameObjects.Components.FIlterList#addCombineColorMatrix
+     * @method Phaser.GameObjects.Components.FilterList#addCombineColorMatrix
      * @since 4.0.0
      * @param {string | Phaser.Textures.Texture} [texture='__WHITE'] - The texture or texture key to use for the transfer texture.
      * @returns
