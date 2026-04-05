@@ -99,7 +99,7 @@ var Particle = new Class({
         this.worldPosition = new Vector2();
 
         /**
-         * The x velocity of this Particle.
+         * The x velocity of this Particle, in pixels per second.
          *
          * @name Phaser.GameObjects.Particles.Particle#velocityX
          * @type {number}
@@ -109,7 +109,7 @@ var Particle = new Class({
         this.velocityX = 0;
 
         /**
-         * The y velocity of this Particle.
+         * The y velocity of this Particle, in pixels per second.
          *
          * @name Phaser.GameObjects.Particles.Particle#velocityY
          * @type {number}
@@ -119,7 +119,7 @@ var Particle = new Class({
         this.velocityY = 0;
 
         /**
-         * The x acceleration of this Particle.
+         * The x acceleration of this Particle, in pixels per second squared.
          *
          * @name Phaser.GameObjects.Particles.Particle#accelerationX
          * @type {number}
@@ -129,7 +129,7 @@ var Particle = new Class({
         this.accelerationX = 0;
 
         /**
-         * The y acceleration of this Particle.
+         * The y acceleration of this Particle, in pixels per second squared.
          *
          * @name Phaser.GameObjects.Particles.Particle#accelerationY
          * @type {number}
@@ -139,7 +139,7 @@ var Particle = new Class({
         this.accelerationY = 0;
 
         /**
-         * The maximum horizontal velocity this Particle can travel at.
+         * The maximum horizontal velocity this Particle can travel at, in pixels per second.
          *
          * @name Phaser.GameObjects.Particles.Particle#maxVelocityX
          * @type {number}
@@ -149,7 +149,7 @@ var Particle = new Class({
         this.maxVelocityX = 10000;
 
         /**
-         * The maximum vertical velocity this Particle can travel at.
+         * The maximum vertical velocity this Particle can travel at, in pixels per second.
          *
          * @name Phaser.GameObjects.Particles.Particle#maxVelocityY
          * @type {number}
@@ -279,7 +279,10 @@ var Particle = new Class({
         this.lifeT = 0;
 
         /**
-         * The data used by the ease equation.
+         * An object that stores the min/max interpolation values for each of this Particle's
+         * properties (such as alpha, tint, scaleX, rotate, etc.) as they are eased over the
+         * particle's lifetime. These values are populated and used by the EmitterOp instances
+         * on the parent Emitter.
          *
          * @name Phaser.GameObjects.Particles.Particle#data
          * @type {Phaser.Types.GameObjects.Particles.ParticleData}
@@ -409,7 +412,7 @@ var Particle = new Class({
     /**
      * Sets the position of this particle to the given x/y coordinates.
      *
-     * If the parameters are left undefined, it resets the particle back to 0x0.
+     * If the parameters are left undefined, it resets the particle back to (0, 0).
      *
      * @method Phaser.GameObjects.Particles.Particle#setPosition
      * @since 3.60.0
@@ -791,7 +794,9 @@ var Particle = new Class({
     },
 
     /**
-     * Destroys this Particle.
+     * Destroys this Particle by nulling its references to the emitter, texture, frame,
+     * and scene. If this Particle has an AnimationState, it is also destroyed. After
+     * calling this method the Particle should not be used again.
      *
      * @method Phaser.GameObjects.Particles.Particle#destroy
      * @since 3.60.0

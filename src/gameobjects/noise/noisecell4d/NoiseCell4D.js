@@ -17,7 +17,7 @@ var NoiseWorley4DFrag = require('../../../renderer/webgl/shaders/NoiseWorley4D-f
  * You can manipulate this object like any other, make it interactive,
  * and use it in filters and masks to create visually stunning effects.
  *
- * Behind the scenes, a NoiseCell4D is a {@see Phaser.GameObjects.Shader}
+ * Behind the scenes, a NoiseCell4D is a {@link Phaser.GameObjects.Shader}
  * using a specific shader program.
  *
  * Cellular noise, also called Worley Noise or Voronoi Noise,

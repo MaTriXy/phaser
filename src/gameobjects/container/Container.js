@@ -508,7 +508,7 @@ var Container = new Class({
     /**
      * Returns the world transform matrix as used for Bounds checks.
      *
-     * The returned matrix is temporal and shouldn't be stored.
+     * The returned matrix is temporary and shouldn't be stored.
      *
      * @method Phaser.GameObjects.Container#getBoundsTransformMatrix
      * @since 3.4.0
@@ -611,7 +611,7 @@ var Container = new Class({
      * @since 3.4.0
      *
      * @param {string} property - The property to lexically sort by.
-     * @param {function} [handler] - Provide your own custom handler function. Will receive 2 children which it should compare and return a boolean.
+     * @param {function} [handler] - Provide your own custom handler function. Will receive 2 children which it should compare and return a negative, zero, or positive number.
      *
      * @return {this} This Container instance.
      */
@@ -1081,7 +1081,7 @@ var Container = new Class({
     },
 
     /**
-     * Shuffles the all Game Objects in this Container using the Fisher-Yates implementation.
+     * Shuffles all Game Objects in this Container using the Fisher-Yates implementation.
      *
      * @method Phaser.GameObjects.Container#shuffle
      * @since 3.4.0
@@ -1160,7 +1160,7 @@ var Container = new Class({
      * @since 3.4.0
      *
      * @param {string} property - The property that must exist on the Game Object.
-     * @param {any} value - The value to get the property to.
+     * @param {any} value - The value to set the property to.
      * @param {number} [startIndex=0] - An optional start index to search from.
      * @param {number} [endIndex=Container.length] - An optional end index to search up to (but not included)
      *

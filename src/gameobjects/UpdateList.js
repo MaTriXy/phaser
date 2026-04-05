@@ -161,7 +161,7 @@ var UpdateList = new Class({
     /**
      * The Scene that owns this plugin is shutting down.
      *
-     * We need to kill and reset all internal properties as well as stop listening to Scene events.
+     * We need to destroy all active, pending, and queued Game Objects, reset all internal properties, and stop listening to Scene events.
      *
      * @method Phaser.GameObjects.UpdateList#shutdown
      * @since 3.0.0
@@ -207,7 +207,7 @@ var UpdateList = new Class({
     /**
      * The Scene that owns this plugin is being destroyed.
      *
-     * We need to shutdown and then kill off all external references.
+     * We need to shut down and then clear all external references.
      *
      * @method Phaser.GameObjects.UpdateList#destroy
      * @since 3.0.0

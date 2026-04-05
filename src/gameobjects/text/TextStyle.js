@@ -222,7 +222,7 @@ var TextStyle = new Class({
         /**
          * The fixed width of the text.
          *
-         * `0` means no fixed with.
+         * `0` means no fixed width.
          *
          * @name Phaser.GameObjects.TextStyle#fixedWidth
          * @type {number}
@@ -818,7 +818,7 @@ var TextStyle = new Class({
     /**
      * Set the shadow settings.
      *
-     * Calling this method always re-measures the parent Text object,
+     * Calling this method always re-renders the parent Text object,
      * so only call it when you actually change the shadow settings.
      *
      * @method Phaser.GameObjects.TextStyle#setShadow

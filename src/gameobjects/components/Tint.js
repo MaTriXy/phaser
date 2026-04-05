@@ -193,7 +193,9 @@ var Tint = {
 
     /**
      * The tint value being applied to the whole of the Game Object.
-     * Returns `tintTopLeft` when this property is read.
+     * Returns the value of `tintTopLeft` when read. When written, the same
+     * color value is applied to all four corner tint properties (`tintTopLeft`,
+     * `tintTopRight`, `tintBottomLeft`, and `tintBottomRight`) simultaneously.
      *
      * @name Phaser.GameObjects.Components.Tint#tint
      * @type {number}
@@ -216,9 +218,10 @@ var Tint = {
     /**
      * Does this Game Object have a tint applied?
      *
-     * It checks to see if the 4 tint properties are set to the value 0xffffff
-     * and that the `tintMode` property is `MULTIPLY`.
-     * This indicates that a Game Object isn't tinted.
+     * Returns `true` if any of the four corner tint values differ from 0xffffff,
+     * or if the `tintMode` property is set to anything other than `MULTIPLY`.
+     * Returns `false` when all four tint values are 0xffffff and the tint mode
+     * is `MULTIPLY`, which is the default untinted state.
      *
      * @name Phaser.GameObjects.Components.Tint#isTinted
      * @type {boolean}

@@ -109,7 +109,7 @@ var configOpMap = [
  * A Particle Emitter is a special kind of Game Object that controls a pool of {@link Phaser.GameObjects.Particles.Particle Particles}.
  *
  * Particle Emitters are created via a configuration object. The properties of this object
- * can be specified in a variety of formats, given you plenty of scope over the values they
+ * can be specified in a variety of formats, giving you plenty of scope over the values they
  * return, leading to complex visual effects. Here are the different forms of configuration
  * value you can give:
  *
@@ -285,7 +285,7 @@ var configOpMap = [
  * By using the above configuration options you have an unlimited amount of
  * control over how your particles behave.
  *
- * ## v3.55 Differences
+ * ## v3.60 Differences
  *
  * Prior to v3.60 Phaser used a `ParticleEmitterManager`. This was removed in v3.60
  * and now calling `this.add.particles` returns a `ParticleEmitter` instance instead.
@@ -837,7 +837,7 @@ var ParticleEmitter = new Class({
         this.counters = new Float32Array(10);
 
         /**
-         * An internal property used to tell when the emitter is in fast-forwarc mode.
+         * An internal property used to tell when the emitter is in fast-forward mode.
          *
          * @name Phaser.GameObjects.Particles.ParticleEmitter#skipping
          * @type {boolean}
@@ -862,7 +862,7 @@ var ParticleEmitter = new Class({
          *
          * When set this overrides the `particleBringToTop` setting.
          *
-         * To reset this and disable sorting, so this property to an empty string.
+         * To reset this and disable sorting, set this property to an empty string.
          *
          * @name Phaser.GameObjects.Particles.ParticleEmitter#sortProperty
          * @type {string}
@@ -945,13 +945,25 @@ var ParticleEmitter = new Class({
         }
     },
 
-    //  Overrides Game Object method
+    /**
+     * Called when this Game Object is added to a Scene. Registers this emitter
+     * with the Scene's update list so it receives `preUpdate` calls each frame.
+     *
+     * @method Phaser.GameObjects.Particles.ParticleEmitter#addedToScene
+     * @since 3.60.0
+     */
     addedToScene: function ()
     {
         this.scene.sys.updateList.add(this);
     },
 
-    //  Overrides Game Object method
+    /**
+     * Called when this Game Object is removed from a Scene. Unregisters this
+     * emitter from the Scene's update list so it no longer receives `preUpdate` calls.
+     *
+     * @method Phaser.GameObjects.Particles.ParticleEmitter#removedFromScene
+     * @since 3.60.0
+     */
     removedFromScene: function ()
     {
         this.scene.sys.updateList.remove(this);
@@ -2330,7 +2342,7 @@ var ParticleEmitter = new Class({
      * @since 3.0.0
      *
      * @param {Phaser.Types.GameObjects.Particles.ParticleEmitterCallback} callback - The function.
-     * @param {*} context - The functions calling context.
+     * @param {*} context - The function's calling context.
      *
      * @return {this} This Particle Emitter.
      */
@@ -2355,7 +2367,7 @@ var ParticleEmitter = new Class({
      * @since 3.0.0
      *
      * @param {Phaser.Types.GameObjects.Particles.ParticleEmitterCallback} callback - The function.
-     * @param {*} context - The functions calling context.
+     * @param {*} context - The function's calling context.
      *
      * @return {this} This Particle Emitter.
      */
@@ -2373,7 +2385,7 @@ var ParticleEmitter = new Class({
     },
 
     /**
-     * Turns {@link Phaser.GameObjects.Particles.ParticleEmitter#on} the emitter and resets the flow counter.
+     * Enables emitting, sets {@link Phaser.GameObjects.Particles.ParticleEmitter#emitting} to `true`, and resets the flow counter.
      *
      * If this emitter is in flow mode (frequency >= 0; the default), the particle flow will start (or restart).
      *
@@ -3166,7 +3178,7 @@ var ParticleEmitter = new Class({
     },
 
     /**
-     * The maximum horizontal velocity emitted particles can reach, in pixels per second squared.
+     * The maximum horizontal velocity emitted particles can reach, in pixels per second.
      *
      * Accessing this property should typically return a number.
      * However, it can be set to any valid EmitterOp onEmit type.
@@ -3191,7 +3203,7 @@ var ParticleEmitter = new Class({
     },
 
     /**
-     * The maximum vertical velocity emitted particles can reach, in pixels per second squared.
+     * The maximum vertical velocity emitted particles can reach, in pixels per second.
      *
      * Accessing this property should typically return a number.
      * However, it can be set to any valid EmitterOp onEmit type.
@@ -3493,7 +3505,7 @@ var ParticleEmitter = new Class({
      *
      * Modify the `ParticleEmitter.tintMode` property to change the tint mode.
      *
-     * The `tint` value will be overriden if a `color` array is provided.
+     * The `tint` value will be overridden if a `color` array is provided.
      *
      * This is a WebGL only feature.
      *
@@ -3781,7 +3793,7 @@ var ParticleEmitter = new Class({
     },
 
     /**
-     * The internal elasped counter.
+     * The internal elapsed counter.
      *
      * Treat this property as read-only.
      *

@@ -158,6 +158,8 @@ var Extern = new Class({
      * @param {Phaser.Renderer.WebGL.WebGLRenderer} renderer - The WebGL Renderer instance.
      * @param {Phaser.Renderer.WebGL.DrawingContext} drawingContext - The current Drawing Context.
      * @param {Phaser.GameObjects.Components.TransformMatrix} calcMatrix - The calculated Transform Matrix for this Extern.
+     * @param {Phaser.GameObjects.GameObject[]} displayList - The current display list for the Scene.
+     * @param {number} displayListIndex - The index of this Extern within the display list.
      */
     render: function ()
     {

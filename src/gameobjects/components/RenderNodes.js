@@ -17,8 +17,8 @@ var RenderNodes = {
     /**
      * Customized WebGL render nodes of this Game Object.
      * RenderNodes are responsible for managing the rendering process of this Game Object.
-     * A default set of RenderNodes are coded into the engine,
-     * but they will check here first to see if a custom one exists.
+     * A default set of RenderNodes is coded into the engine,
+     * but the renderer will check this object first to see if a custom node has been set.
      *
      * @name Phaser.GameObjects.Components.RenderNodes#customRenderNodes
      * @type {object}
@@ -165,7 +165,7 @@ var RenderNodes = {
     },
 
     /**
-     * Adds an entry to the `renderNodeData` object of this game object.
+     * Sets or removes a property in the data object for a specific render node within `renderNodeData`.
      *
      * If `key` is not set, it is created. If it is set, it is updated.
      *

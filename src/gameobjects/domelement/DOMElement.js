@@ -194,7 +194,8 @@ var DOMElement = new Class({
         /**
          * A Vector4 that contains the 3D rotation of this DOM Element around a fixed axis in 3D space.
          *
-         * All values in the Vector4 are treated as degrees, unless the `rotate3dAngle` property is changed.
+         * The x, y, and z components define the direction of the rotation axis. The w component holds the
+         * angle of rotation, in the unit defined by the `rotate3dAngle` property (degrees by default).
          *
          * For more details see the following MDN page:
          *
@@ -683,7 +684,7 @@ var DOMElement = new Class({
      * @method Phaser.GameObjects.DOMElement#createFromCache
      * @since 3.17.0
      *
-     * @param {string} The key of the html cache entry to use for this DOM Element.
+     * @param {string} key - The key of the html cache entry to use for this DOM Element.
      * @param {string} [tagName='div'] - The tag name of the element into which all of the loaded html will be inserted. Defaults to a plain div tag.
      *
      * @return {this} This DOM Element instance.

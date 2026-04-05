@@ -36,7 +36,7 @@ var GameObjectFactory = require('../GameObjectFactory');
  * all the usual things to it, such as scaling, rotating, cropping, tinting, making interactive, giving a
  * physics body, etc.
  *
- * Transparent videos are also possible via the WebM file format. Providing the video file has was encoded with
+ * Transparent videos are also possible via the WebM file format. Providing the video file has been encoded with
  * an alpha channel, and providing the browser supports WebM playback (not all of them do), then it will render
  * in-game with full transparency.
  *

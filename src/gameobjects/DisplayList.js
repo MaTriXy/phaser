@@ -37,7 +37,7 @@ var DisplayList = new Class({
         List.call(this, scene);
 
         /**
-         * The flag the determines whether Game Objects should be sorted when `depthSort()` is called.
+         * The flag that determines whether Game Objects should be sorted when `depthSort()` is called.
          *
          * @name Phaser.GameObjects.DisplayList#sortChildrenFlag
          * @type {boolean}
