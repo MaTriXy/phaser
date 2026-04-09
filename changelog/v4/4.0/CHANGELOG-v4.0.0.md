@@ -1,4 +1,6 @@
-# Phaser 4.0.0 Changelog
+# Phaser 4 Changelog
+
+## Version 4.0.0 - Caladan - 10th April 2026
 
 Phaser v4 is a major release built on a brand-new, highly efficient WebGL renderer. The entire rendering pipeline from Phaser v3 has been replaced with a modern render node architecture that manages WebGL state, supports context restoration, and prioritizes performance. Alongside the new renderer, v4 brings new game objects, a unified filter system replacing both FX and Masks, a rewritten camera system, overhauled tint and shader APIs, a new lighting model, and hundreds of fixes and improvements.
 
@@ -685,6 +687,7 @@ All enhancements from late Phaser v3 development have been merged into v4. This 
 - Fail gracefully when a texture isn't created in `addBase64()`.
 - Fix texture offsets in `ParseXMLBitmapFont`. Thanks to @leemanhopeter.
 - Fix `TextureManager.addUint8Array` method, which got premultiplied alpha wrong and flipY wrong.
+- Fix `Textures.Parsers.AtlasXML` passing trimmed and untrimmed dimensions in the wrong order to setTrim(), causing frame.realWidth to return the trimmed size instead of the original size. This made setOrigin() compute incorrect pivots for any non-default origin. Fix #7245 (thanks @cmnemoi)
 
 ### SpriteGPULayer Fixes
 
