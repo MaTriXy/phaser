@@ -66,39 +66,15 @@ We support Vue.js, React, Angular, Next.js, SolidJS, Svelte and Remix with Vite,
 
 ## How Big is Phaser?
 
-Don't be alarmed if you look at `phaser.js` and see a file approaching 10 MB. Over 84% of that is inline documentation - JSDoc comments, type annotations, and detailed method descriptions that power the TypeScript definitions and API docs. It's there for your IDE, not for your players.
+Don't be alarmed if you look at `phaser.js` and see a file over 8 MB. Over 84% of that is inline documentation - JSDoc comments, type annotations, and detailed method descriptions that power the TypeScript definitions and API docs. It's there for your IDE, not for your players.
 
-The minified build, `phaser.min.js`, strips all of that out and comes in at **345 KB** with standard gzip server compression. This is the full version, with every feature included, but is still smaller than most title screen images. You can reduce it further still by tweaking the build settings to exclude features your game doesn't need.
+The minified build, `phaser.min.js`, strips all of that out and comes in at **345 KB** with standard gzip web server compression. This is the full version, with every feature included, but is still smaller than most title screen images. You can reduce it further still by tweaking the build settings to exclude features your game doesn't need.
 
 | Build | Raw Size | Compressed (gzip) |
 | ----- | -------- | ------------------ |
 | `phaser.js` (with docs) | 8.23 MB | - |
 | `phaser.min.js` (full) | 1.29 MB | 345 KB |
 | `phaser-arcade.min.js` | 1.18 MB | 313 KB |
-
-## Your First Game
-
-```js
-class GameScene extends Phaser.Scene {
-    preload() {
-        this.load.image('logo', 'assets/logo.png');
-    }
-
-    create() {
-        this.add.image(400, 300, 'logo');
-        this.add.text(400, 500, 'Hello Phaser 4!', { fontSize: '32px' }).setOrigin(0.5);
-    }
-}
-
-const config = {
-    type: Phaser.AUTO,
-    width: 800,
-    height: 600,
-    scene: GameScene
-};
-
-const game = new Phaser.Game(config);
-```
 
 ### Why Phaser?
 
@@ -108,8 +84,6 @@ const game = new Phaser.Game(config);
 - **Framework agnostic** - Works with React, Vue, Angular, Svelte, or plain JavaScript and TypeScript. Use whatever tools you prefer.
 - **Massive ecosystem** - Over 2,000 code examples. Extensive API documentation. Active Discord and forums. First-class TypeScript definitions.
 - **AI-ready** - Phaser's API is well understood by every major frontier LLM. This repository includes a comprehensive set of [AI agent skills](skills/) that give coding agents deep knowledge of every Phaser subsystem, making it the ideal framework for AI-assisted game development.
-
----
 
 ## What's New in Phaser 4
 
