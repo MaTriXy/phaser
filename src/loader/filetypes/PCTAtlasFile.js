@@ -12,29 +12,13 @@ var GetFastValue = require('../../utils/object/GetFastValue');
 var ImageFile = require('./ImageFile');
 var IsPlainObject = require('../../utils/object/IsPlainObject');
 var MultiFile = require('../MultiFile');
-var PCTParser = require('../../textures/parsers/PCT');
+var PCTDecode = require('../../textures/parsers/PCTDecode');
 
-/**
- * @classdesc
- * An internal File class used by PCTAtlasFile to load and decode a `.pct` data file into its
- * structured representation. Unlike the generic TextFile this parses the loaded text as a Phaser
- * Compact Texture Atlas and stores the decoded object (containing `pages`, `folders`, and
- * `frames`) as `this.data`, which is later written to the atlas cache.
- *
- * This file type is not registered with the Loader and should not be used directly.
- *
- * @class PCTDataFile
- * @extends Phaser.Loader.File
- * @memberof Phaser.Loader.FileTypes
- * @constructor
- * @private
- * @since 4.0.0
- *
- * @param {Phaser.Loader.LoaderPlugin} loader - A reference to the Loader that is responsible for this file.
- * @param {string} key - The key of the file within the loader.
- * @param {string} url - The absolute or relative URL to load the PCT data file from.
- * @param {Phaser.Types.Loader.XHRSettingsObject} [xhrSettings] - Extra XHR Settings specifically for this file.
- */
+//  Internal File class used by PCTAtlasFile to load and decode a `.pct` data file into its
+//  structured representation. Unlike the generic TextFile this parses the loaded text as a
+//  Phaser Compact Texture Atlas and stores the decoded object (containing `pages`, `folders`,
+//  and `frames`) as `this.data`, which is later written to the atlas cache by the parent
+//  MultiFile. This type is not registered with the Loader and is not part of the public API.
 var PCTDataFile = new Class({
 
     Extends: File,
@@ -56,18 +40,13 @@ var PCTDataFile = new Class({
         File.call(this, loader, fileConfig);
     },
 
-    /**
-     * Called automatically by Loader.nextFile. Decodes the loaded PCT text into its structured
-     * object form via `Phaser.Textures.Parsers.PCT.decode` and stores it as `this.data`.
-     *
-     * @method Phaser.Loader.FileTypes.PCTDataFile#onProcess
-     * @since 4.0.0
-     */
+    //  Called automatically by Loader.nextFile. Decodes the loaded PCT text into its structured
+    //  object form via Phaser.Textures.Parsers.PCTDecode and stores it as this.data.
     onProcess: function ()
     {
         this.state = CONST.FILE_PROCESSING;
 
-        var decoded = PCTParser.decode(this.xhrLoader.responseText);
+        var decoded = PCTDecode(this.xhrLoader.responseText);
 
         if (!decoded)
         {
@@ -92,11 +71,11 @@ var PCTDataFile = new Class({
  * the Texture Manager under a single key. The decoded PCT data is also stored in the global
  * Atlas Cache, keyed by the file key.
  *
- * These are created when you use the Phaser.Loader.LoaderPlugin#pct method and are not typically
- * created directly.
+ * These are created when you use the Phaser.Loader.LoaderPlugin#atlasPCT method and are not
+ * typically created directly.
  *
  * For documentation about what all the arguments and configuration options mean please see
- * Phaser.Loader.LoaderPlugin#pct.
+ * Phaser.Loader.LoaderPlugin#atlasPCT.
  *
  * @class PCTAtlasFile
  * @extends Phaser.Loader.MultiFile
@@ -277,7 +256,7 @@ var PCTAtlasFile = new Class({
  * ```javascript
  * function preload ()
  * {
- *     this.load.pct('level1', 'images/Level1.pct');
+ *     this.load.atlasPCT('level1', 'images/Level1.pct');
  * }
  * ```
  *
@@ -310,7 +289,7 @@ var PCTAtlasFile = new Class({
  * Instead of passing arguments you can pass a configuration object, such as:
  *
  * ```javascript
- * this.load.pct({
+ * this.load.atlasPCT({
  *     key: 'level1',
  *     atlasURL: 'images/Level1.pct'
  * });
@@ -321,7 +300,7 @@ var PCTAtlasFile = new Class({
  * Once the atlas has finished loading you can use frames from it as textures for a Game Object by referencing its key:
  *
  * ```javascript
- * this.load.pct('level1', 'images/Level1.pct');
+ * this.load.atlasPCT('level1', 'images/Level1.pct');
  * // and later in your game ...
  * this.add.image(x, y, 'level1', 'background');
  * ```
@@ -345,7 +324,7 @@ var PCTAtlasFile = new Class({
  * Note: The ability to load this type of file will only be available if the PCT Atlas File type has been built into Phaser.
  * It is available in the default build but can be excluded from custom builds.
  *
- * @method Phaser.Loader.LoaderPlugin#pct
+ * @method Phaser.Loader.LoaderPlugin#atlasPCT
  * @fires Phaser.Loader.Events#ADD
  * @since 4.0.0
  *
@@ -357,7 +336,7 @@ var PCTAtlasFile = new Class({
  *
  * @return {this} The Loader instance.
  */
-FileTypesManager.register('pct', function (key, atlasURL, path, baseURL, atlasXhrSettings)
+FileTypesManager.register('atlasPCT', function (key, atlasURL, path, baseURL, atlasXhrSettings)
 {
     var multifile;
 

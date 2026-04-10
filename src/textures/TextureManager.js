@@ -773,7 +773,7 @@ var TextureManager = new Class({
      * - **JSON Hash** — the `frames` field is an Object. Used by Texture Packer's "JSON Hash" export.
      *   Dispatched to `addAtlasJSONHash`.
      * - **Phaser Compact Texture (PCT)** — a decoded PCT data object with a `pages` array. This is
-     *   the compact line-oriented format loaded by `LoaderPlugin#pct`. Dispatched to `addAtlasPCT`.
+     *   the compact line-oriented format loaded by `LoaderPlugin#atlasPCT`. Dispatched to `addAtlasPCT`.
      *
      * The format is detected automatically from the shape of the `data` argument. As of Phaser 3.60
      * you can use this method to add an atlas data set to an existing Phaser Texture.
@@ -944,12 +944,12 @@ var TextureManager = new Class({
      *
      * PCT is a compact line-oriented atlas format. A single PCT file can describe multiple atlas
      * pages, each referencing a separate texture image. The `data` argument must be a decoded PCT
-     * structure as produced by `Phaser.Textures.Parsers.PCT.decode` — that is, an object containing
+     * structure as produced by `Phaser.Textures.Parsers.PCTDecode` — that is, an object containing
      * `pages`, `folders`, and `frames` fields. The `source` argument should be a single Image or an
      * Array of Images, one per page, in the same order as the `pages` field on the decoded data.
      *
      * You do not normally need to call this method directly. It is called automatically when the
-     * `LoaderPlugin#pct` method finishes loading a PCT file. You can also use this method to add a
+     * `LoaderPlugin#atlasPCT` method finishes loading a PCT file. You can also use this method to add a
      * decoded PCT data set to an existing Phaser Texture.
      *
      * @method Phaser.Textures.TextureManager#addAtlasPCT

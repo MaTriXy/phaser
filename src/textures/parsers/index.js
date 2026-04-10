@@ -17,6 +17,7 @@ module.exports = {
     JSONHash: require('./JSONHash'),
     KTXParser: require('./KTXParser'),
     PCT: require('./PCT'),
+    PCTDecode: require('./PCTDecode'),
     PVRParser: require('./PVRParser'),
     SpriteSheet: require('./SpriteSheet'),
     SpriteSheetFromAtlas: require('./SpriteSheetFromAtlas'),
