@@ -38,6 +38,7 @@ For a step-by-step guide on updating your v3 project, see the [Migration Guide](
     - [Display and Color](#display-and-color)
     - [Math](#math)
     - [Textures](#textures)
+    - [Phaser Compact Texture Atlas](#phaser-compact-texture-atlas)
     - [SpriteGPULayer](#spritegpulayer)
     - [TileSprite Features](#tilesprite-features)
     - [DynamicTexture and RenderTexture Features](#dynamictexture-and-rendertexture-features)
@@ -430,6 +431,55 @@ Filters can be applied to any game object or scene camera.
 - `TextureManager#addFlatColor` method for creating a flat texture with custom color, alpha, width, and height. This is intended to act as a temporary stand-in for textures you might not have loaded yet.
 - `TextureSource#updateSource` method for switching sources directly.
 - New `Phaser.Types.Textures.TextureSource` and `Phaser.Types.Textures.TextureSourceElement` types to simplify the increasing number of sources for a texture.
+
+### Phaser Compact Texture Atlas
+
+Phaser v4 introduces a new texture atlas format called the **Phaser Compact Texture (PCT)** atlas. It is a line-oriented text descriptor designed as a drop-in replacement for verbose JSON or XML based atlas files, while remaining trivially parsable at runtime. A single `.pct` file can describe one or many atlas pages and is supported throughout the Loader, Texture Manager, and Atlas Cache.
+
+**Why use it:** PCT files are typically **90-95% smaller** than equivalent JSON atlas descriptors. For an atlas with hundreds of frames this can mean a multi-kilobyte JSON file collapsing to a few hundred bytes of plain text — important for fast cold-start loads, mobile data budgets, and games with many atlases.
+
+**How to create PCT files:** A free on-line texture packer tool will be available on the Phaser website at https://phaser.io/tools/ or you can feed the specification file to your favorite AI agent and have it create one.
+
+**How it works:** A `.pct` file is plain UTF-8 text. Each line is a record identified by a short prefix (`PCT:`, `P:`, `F:`, `#`, `B:`, `A:`, or an individual frame line). The format includes:
+
+- **Block grouping** — runs of same-sized sprites packed in a grid are stored as a single `B:` record plus one names line, instead of one record per frame.
+- **Range compression** — sequential frame names like `walk_01` through `walk_24` collapse to `walk_#01-24`.
+- **Folder dictionary** — repeated folder paths are interned in a small `F:` table and referenced by index.
+- **Extension dictionary** — common extensions (`.png`, `.webp`, `.jpg`, `.jpeg`, `.gif`) are encoded as a single trailing digit.
+- **Aliases** — pixel-identical duplicate frames detected at packing time share a single atlas region via `A:` records.
+- **Multi-page atlases** — a single `.pct` file can declare multiple texture pages and route frames to the correct one with `#N` page selectors.
+
+The format is versioned (`PCT:1.0`) using `major.minor` semver-style numbering, so future minor revisions can add features without breaking older parsers.
+
+**How to use it:** Load a PCT atlas exactly the same way you would load any other Phaser asset, using the new `LoaderPlugin#atlasPCT` method:
+
+```javascript
+function preload ()
+{
+    this.load.atlasPCT('level1', 'images/Level1.pct', 'images');
+}
+
+function create ()
+{
+    this.add.image(x, y, 'level1', 'warrior/idle_01.png');
+
+    //  The decoded structure is also available from the Atlas Cache
+    var data = this.cache.atlas.get('level1');
+}
+```
+
+The Loader reads the `.pct` file, decodes it, queues each referenced texture page as a separate image, and once everything has loaded, assembles a single multi-source `Texture` in the Texture Manager. The decoded `{ pages, folders, frames }` object is also stored in a new `Phaser.Cache.CacheManager#atlas` cache so you can inspect the page and folder metadata at runtime.
+
+**Specification:** A complete description of the format — record types, decoding algorithm, helper functions, and worked examples — lives at `docs/Phaser Compact Texture Atlas Format Specification/Phaser Compact Texture Atlas Format Specification.md`. Anyone wanting to write a PCT exporter for a different tool can implement the loader directly from that document.
+
+**API surface:**
+
+- New `LoaderPlugin#atlasPCT(key, url)` method registered via `FileTypesManager`. Accepts a string key and URL, an array of file definitions, or a config object with `key`, `atlasURL`, `path`, `baseURL`, and `xhrSettings`.
+- New `Phaser.Loader.FileTypes.PCTAtlasFile` MultiFile class which loads the `.pct` data file, dynamically queues an `ImageFile` for each page declared inside it, and adds the assembled atlas to the Texture Manager when all of its children are loaded.
+- New `Phaser.Textures.TextureManager#addAtlasPCT(key, source, data, dataSource)` method for adding a decoded PCT atlas to a Texture. The existing `addAtlas` method now auto-detects PCT data by shape and dispatches to it, alongside the existing JSON Array and JSON Hash dispatch.
+- New `Phaser.Textures.Parsers.PCT(texture, decoded)` parser which iterates the decoded frames and creates `Frame` instances on the matching `TextureSource`, including trim and rotation handling. The PCT page and folder metadata is copied onto `Texture#customData.pct` for later inspection.
+- New `Phaser.Textures.Parsers.PCTDecode(text)` standalone helper which converts raw PCT text into the structured `{ pages, folders, frames }` object, validates the version header, and is safe to call directly if you have PCT text from a non-Loader source.
+- New `Phaser.Cache.CacheManager#atlas` BaseCache instance, used to store decoded PCT data alongside its texture entry in the Texture Manager. Accessible from a Scene as `this.cache.atlas`.
 
 ### SpriteGPULayer
 
