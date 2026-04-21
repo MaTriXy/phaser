@@ -185,7 +185,7 @@ var RenderTexture = new Class({
      * In Canvas it will resize the underlying canvas element.
      *
      * Both approaches will erase everything currently drawn to the Render Texture.
-     * 
+     *
      * Calling this will then invoke the `setSize` method, setting the internal size of this Game Object
      * to the values given to this method.
      *
@@ -240,6 +240,11 @@ var RenderTexture = new Class({
      * stop rendering. Ensure you remove the texture from the Texture Manager and any Game Objects
      * using it first, before destroying this Render Texture.
      *
+     * Note that the texture is assigned a random key on creation.
+     * This key will be replaced with the new key.
+     * If the texture was previously removed from the texture manager,
+     * it will be added back so it can be reused.
+     *
      * @method Phaser.GameObjects.RenderTexture#saveTexture
      * @since 3.12.0
      *
@@ -250,12 +255,22 @@ var RenderTexture = new Class({
     saveTexture: function (key)
     {
         var texture = this.texture;
-
-        texture.key = key;
-
-        if (texture.manager.addDynamicTexture(texture))
+        var oldKey = texture.key;
+        var textureManager = texture.manager;
+        if (textureManager.exists(oldKey) && textureManager.get(oldKey) === texture)
         {
+            textureManager.renameTexture(oldKey, key);
+
             this._saved = true;
+        }
+        else
+        {
+            texture.key = key;
+
+            if (texture.manager.addDynamicTexture(texture))
+            {
+                this._saved = true;
+            }
         }
 
         return texture;
