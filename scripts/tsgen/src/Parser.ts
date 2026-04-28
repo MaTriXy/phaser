@@ -493,8 +493,7 @@ export class Parser {
                     returnType = this.parseType(doclet.returns[0]);
                 }
                 type = dom.create.functionType([], returnType);
-                const fn = dom.create.function('', [], returnType);
-                this.setParams(doclet, fn);
+                this.setParams(doclet, type as unknown as dom.FunctionDeclaration);
             } else {
                 type = this.parseType(doclet);
             }
